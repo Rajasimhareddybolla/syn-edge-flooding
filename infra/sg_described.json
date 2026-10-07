@@ -1,0 +1,65 @@
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-09e89875382c47277",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "lab-sg"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "tcp-flood-lab"
+                }
+            ],
+            "VpcId": "vpc-091281d6eb74da886",
+            "SecurityGroupArn": "arn:aws:ec2:ap-south-1:204284492825:security-group/sg-09e89875382c47277",
+            "OwnerId": "204284492825",
+            "GroupName": "lab-sg",
+            "Description": "TCP Flood Lab SG - Restricted to operator /32 SSH and intra-SG mesh",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "-1",
+                    "UserIdGroupPairs": [
+                        {
+                            "UserId": "204284492825",
+                            "GroupId": "sg-09e89875382c47277"
+                        }
+                    ],
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                },
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": 22,
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [],
+                    "IpRanges": [
+                        {
+                            "CidrIp": "152.57.107.6/32"
+                        },
+                        {
+                            "CidrIp": "152.57.129.48/32"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": []
+                }
+            ]
+        }
+    ]
+}

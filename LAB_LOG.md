@@ -50,3 +50,22 @@
 - **Evidence Artifacts:** `.gitignore`, `STATE.md`, `LAB_LOG.md`, `PROJECT.md`.
 - **Impact Analysis:** Commences automated cloud provisioning for `tcp-flood-lab`.
 - **Human Authorization:** Dispatched by `orchestrator_1`.
+
+
+## [2026-10-07T07:06:18Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.107.6/32.
+- **Rationale / Justification:** Maintain operator reachability.
+
+
+## [2026-10-07T07:09:11Z] — RESOURCE_ALLOCATION: AWS Infrastructure Provisioned
+- **Phase:** Phase 1 (Infrastructure Provisioning)
+- **Agent / Actor:** worker_m1
+- **Category:** [RESOURCE_ALLOCATION]
+- **Description:** Provisioned Security Group sg-09e89875382c47277 (/32 SSH only), Key Pair tcp-flood-lab, and 3 t3.micro instances (victim=i-0f89c07ce382931f2, attacker=i-03e8f67a9cb58c94a, client=i-07f191b24634a44ca) in subnet-0709c5a163cc423bb with CpuCredits=standard.
+- **Rationale / Justification:** Establishing physical multi-node isolated research testbed for Milestone 1.
+- **Evidence Artifacts:** infra/sg_described.json, infra/instances_described.json, lab.env, infra/ping_verification.txt.
+- **Impact Analysis:** Testbed is fully operational and safely locked down.
+- **Human Authorization:** Covered under Gate G1 approval.

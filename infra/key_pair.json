@@ -1,0 +1,21 @@
+{
+    "KeyPairs": [
+        {
+            "KeyPairId": "key-01223e14c91205f04",
+            "KeyType": "rsa",
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "tcp-flood-lab"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "tcp-flood-lab"
+                }
+            ],
+            "CreateTime": "2026-10-07T06:58:01.544000+00:00",
+            "KeyName": "tcp-flood-lab",
+            "KeyFingerprint": "e6:74:b8:4f:01:1b:68:b6:82:00:8a:66:e4:3d:4d:0f:a8:ec:c0:29"
+        }
+    ]
+}

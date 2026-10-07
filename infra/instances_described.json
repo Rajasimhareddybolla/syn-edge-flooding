@@ -1,0 +1,514 @@
+{
+    "Reservations": [
+        {
+            "ReservationId": "r-06a27f6e018ec0e98",
+            "OwnerId": "204284492825",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-10-07T06:58:40+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0e6634d0a5e294cd2",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "b18ae77a-a153-43d2-8ca6-46c7216097a3",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-13-206-119-8.ap-south-1.compute.amazonaws.com",
+                                "PublicIp": "13.206.119.8"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-10-07T06:58:40+00:00",
+                                "AttachmentId": "eni-attach-04ea91ad7fbdaeae5",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-09e89875382c47277",
+                                    "GroupName": "lab-sg"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:de:21:12:49",
+                            "NetworkInterfaceId": "eni-0833934e2c2007f53",
+                            "OwnerId": "204284492825",
+                            "PrivateDnsName": "ip-172-31-41-87.ap-south-1.compute.internal",
+                            "PrivateIpAddress": "172.31.41.87",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-13-206-119-8.ap-south-1.compute.amazonaws.com",
+                                        "PublicIp": "13.206.119.8"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-41-87.ap-south-1.compute.internal",
+                                    "PrivateIpAddress": "172.31.41.87"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0709c5a163cc423bb",
+                            "VpcId": "vpc-091281d6eb74da886",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-09e89875382c47277",
+                            "GroupName": "lab-sg"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Project",
+                            "Value": "tcp-flood-lab"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "client"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "client"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-10-07T06:58:40+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-07f191b24634a44ca",
+                    "ImageId": "ami-065d2b03fb493085a",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-41-87.ap-south-1.compute.internal",
+                    "PublicDnsName": "ec2-13-206-119-8.ap-south-1.compute.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "KeyName": "tcp-flood-lab",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-10-07T06:58:40+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "aps1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "ap-south-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0709c5a163cc423bb",
+                    "VpcId": "vpc-091281d6eb74da886",
+                    "PrivateIpAddress": "172.31.41.87",
+                    "PublicIpAddress": "13.206.119.8"
+                }
+            ]
+        },
+        {
+            "ReservationId": "r-0256a967e95005659",
+            "OwnerId": "204284492825",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-10-07T06:58:10+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-06452d987796d6f1d",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "7ded93fd-eb25-4221-8d15-2aa2727b7d85",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-13-235-246-92.ap-south-1.compute.amazonaws.com",
+                                "PublicIp": "13.235.246.92"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-10-07T06:58:09+00:00",
+                                "AttachmentId": "eni-attach-0c1f660b1b367e20f",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-09e89875382c47277",
+                                    "GroupName": "lab-sg"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:d3:10:e8:3f",
+                            "NetworkInterfaceId": "eni-0ae73bf6bd2b14b58",
+                            "OwnerId": "204284492825",
+                            "PrivateDnsName": "ip-172-31-37-214.ap-south-1.compute.internal",
+                            "PrivateIpAddress": "172.31.37.214",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-13-235-246-92.ap-south-1.compute.amazonaws.com",
+                                        "PublicIp": "13.235.246.92"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-37-214.ap-south-1.compute.internal",
+                                    "PrivateIpAddress": "172.31.37.214"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0709c5a163cc423bb",
+                            "VpcId": "vpc-091281d6eb74da886",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-09e89875382c47277",
+                            "GroupName": "lab-sg"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "victim"
+                        },
+                        {
+                            "Key": "Project",
+                            "Value": "tcp-flood-lab"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "victim"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-10-07T06:58:09+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-0f89c07ce382931f2",
+                    "ImageId": "ami-065d2b03fb493085a",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-37-214.ap-south-1.compute.internal",
+                    "PublicDnsName": "ec2-13-235-246-92.ap-south-1.compute.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "KeyName": "tcp-flood-lab",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-10-07T06:58:09+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "aps1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "ap-south-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0709c5a163cc423bb",
+                    "VpcId": "vpc-091281d6eb74da886",
+                    "PrivateIpAddress": "172.31.37.214",
+                    "PublicIpAddress": "13.235.246.92"
+                }
+            ]
+        },
+        {
+            "ReservationId": "r-0aa5c6f056f8b1cb4",
+            "OwnerId": "204284492825",
+            "Groups": [],
+            "Instances": [
+                {
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2026-10-07T06:58:12+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0606276d4a9833362",
+                                "EbsCardIndex": 0
+                            }
+                        }
+                    ],
+                    "ClientToken": "61b8b1a7-8509-472f-8e10-895c1cdd8184",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-65-2-190-166.ap-south-1.compute.amazonaws.com",
+                                "PublicIp": "65.2.190.166"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2026-10-07T06:58:12+00:00",
+                                "AttachmentId": "eni-attach-0639137c449b0d1c5",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupId": "sg-09e89875382c47277",
+                                    "GroupName": "lab-sg"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:ff:d7:9e:de:41",
+                            "NetworkInterfaceId": "eni-0e37236a0ec0d02db",
+                            "OwnerId": "204284492825",
+                            "PrivateDnsName": "ip-172-31-42-168.ap-south-1.compute.internal",
+                            "PrivateIpAddress": "172.31.42.168",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "amazon",
+                                        "PublicDnsName": "ec2-65-2-190-166.ap-south-1.compute.amazonaws.com",
+                                        "PublicIp": "65.2.190.166"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-42-168.ap-south-1.compute.internal",
+                                    "PrivateIpAddress": "172.31.42.168"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0709c5a163cc423bb",
+                            "VpcId": "vpc-091281d6eb74da886",
+                            "InterfaceType": "interface",
+                            "Operator": {
+                                "Managed": false
+                            }
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupId": "sg-09e89875382c47277",
+                            "GroupName": "lab-sg"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Project",
+                            "Value": "tcp-flood-lab"
+                        },
+                        {
+                            "Key": "Role",
+                            "Value": "attacker"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "attacker"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 1,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled",
+                        "HttpProtocolIpv6": "disabled",
+                        "InstanceMetadataTags": "disabled"
+                    },
+                    "EnclaveOptions": {
+                        "Enabled": false
+                    },
+                    "BootMode": "uefi-preferred",
+                    "PlatformDetails": "Linux/UNIX",
+                    "UsageOperation": "RunInstances",
+                    "UsageOperationUpdateTime": "2026-10-07T06:58:12+00:00",
+                    "PrivateDnsNameOptions": {
+                        "HostnameType": "ip-name",
+                        "EnableResourceNameDnsARecord": false,
+                        "EnableResourceNameDnsAAAARecord": false
+                    },
+                    "MaintenanceOptions": {
+                        "AutoRecovery": "default",
+                        "RebootMigration": "default"
+                    },
+                    "CurrentInstanceBootMode": "uefi",
+                    "NetworkPerformanceOptions": {
+                        "BandwidthWeighting": "default"
+                    },
+                    "Operator": {
+                        "Managed": false,
+                        "HiddenByDefault": false
+                    },
+                    "SecondaryInterfaces": [],
+                    "InstanceId": "i-03e8f67a9cb58c94a",
+                    "ImageId": "ami-065d2b03fb493085a",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "PrivateDnsName": "ip-172-31-42-168.ap-south-1.compute.internal",
+                    "PublicDnsName": "ec2-65-2-190-166.ap-south-1.compute.amazonaws.com",
+                    "StateTransitionReason": "",
+                    "KeyName": "tcp-flood-lab",
+                    "AmiLaunchIndex": 0,
+                    "ProductCodes": [],
+                    "InstanceType": "t3.micro",
+                    "LaunchTime": "2026-10-07T06:58:12+00:00",
+                    "Placement": {
+                        "AvailabilityZoneId": "aps1-az1",
+                        "GroupName": "",
+                        "Tenancy": "default",
+                        "AvailabilityZone": "ap-south-1a"
+                    },
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "SubnetId": "subnet-0709c5a163cc423bb",
+                    "VpcId": "vpc-091281d6eb74da886",
+                    "PrivateIpAddress": "172.31.42.168",
+                    "PublicIpAddress": "65.2.190.166"
+                }
+            ]
+        }
+    ]
+}

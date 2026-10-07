@@ -2,10 +2,10 @@
 
 **Document Version:** 1.0  
 **Integrity Mode:** development  
-**Current Phase:** Phase 1 (Infrastructure Provisioning)  
+**Current Phase:** Phase 2 (Victim Environment & Tooling / Milestone M2 Ready)  
 **Overall Status:** IN_PROGRESS  
 **Lead Orchestrator:** orchestrator_1 (conversationId: f6cfd525-c586-41eb-8148-3a42cc6823d8)  
-**Last Updated:** 2026-10-07T06:55:00Z  
+**Last Updated:** 2026-10-07T07:12:00Z  
 
 ---
 
@@ -24,7 +24,7 @@
 | Phase | Milestone | Name | Owner | Status | Started | Completed | Primary Artifacts | Handoff Report |
 |---|---|---|---|---|---|---|---|---|
 | **0** | M1 | Preflight & Scaffolding | worker_m1 | COMPLETE | 2026-10-07T06:20:27Z | 2026-10-07T06:55:00Z | `.gitignore`, `STATE.md`, `LAB_LOG.md`, directories | `handoffs/A0.md` |
-| **1** | M1 | AWS Infrastructure Provisioning | worker_m1 | IN_PROGRESS | 2026-10-07T06:55:00Z | — | `lab.env`, `infra/sg_described.json`, `infra/instances_described.json`, `infra/ping_verification.txt` | `handoffs/A1.md` |
+| **1** | M1 | AWS Infrastructure Provisioning | worker_m1 | COMPLETE | 2026-10-07T06:55:00Z | 2026-10-07T07:11:00Z | `lab.env`, `infra/sg_described.json`, `infra/instances_described.json`, `infra/ping_verification.txt` | `handoffs/A1.md` |
 | **2** | M2 | Victim Environment & Tooling | A2 | PLANNED | — | — | Nginx backlog=128, sysctl profiles, `infra/attacker_rules.txt`, defaults | `handoffs/A2.md` |
 | **3** | M3 | Telemetry Instrumentation | A3 | PLANNED | — | — | `tools/sampler.py`, `tools/probe.sh`, `tools/collect.sh` | `handoffs/A3.md` |
 | **4** | M3 | Traffic Calibration & Guardrails | A4 | PLANNED | — | — | `tools/attack_guard.sh`, `infra/guard_selftest.txt`, `infra/crowd_levels.json` | `handoffs/A4.md` |
@@ -39,21 +39,19 @@
 
 ## 3. Active Cloud Resources Inventory
 
-*Updated following Phase 1 completion.*
-
 | Attribute | Specification Value | Actual Provisioned Value |
 |---|---|---|
 | **AWS Region** | `ap-south-1` (Mumbai) | `ap-south-1` |
 | **VPC ID** | Default VPC | `vpc-091281d6eb74da886` |
 | **Availability Zone / Subnet** | `ap-south-1a` | `subnet-0709c5a163cc423bb` |
-| **Security Group ID** | `lab-sg` (SSH /32 only) | [Pending Phase 1] |
-| **EC2 Key Pair Name** | `tcp-flood-lab` | `tcp-flood-lab` |
+| **Security Group ID** | `lab-sg` (SSH /32 only) | `sg-09e89875382c47277` |
+| **EC2 Key Pair Name** | `tcp-flood-lab` | `tcp-flood-lab` (`~/.ssh/tcp-flood-lab.pem`, 400) |
 | **Ubuntu 24.04 AMI** | Noble HVM gp3 x86_64 | `ami-065d2b03fb493085a` |
-| **Victim Instance** | `t3.micro` (`ens5`) | [Pending Phase 1] |
-| **Attacker Instance** | `t3.micro` | [Pending Phase 1] |
-| **Client Instance** | `t3.micro` | [Pending Phase 1] |
-| **Total Active EC2 Instances** | Max 3 | 0 |
-| **Estimated Accrued Cost** | $\le$ $15.00 limit | $0.00 |
+| **Victim Instance** | `t3.micro` (`ens5`) | `i-0f89c07ce382931f2` (Pub: `13.235.246.92`, Priv: `172.31.37.214`) |
+| **Attacker Instance** | `t3.micro` | `i-03e8f67a9cb58c94a` (Pub: `65.2.190.166`, Priv: `172.31.42.168`) |
+| **Client Instance** | `t3.micro` | `i-07f191b24634a44ca` (Pub: `13.206.119.8`, Priv: `172.31.41.87`) |
+| **Total Active EC2 Instances** | Max 3 | 3 |
+| **Estimated Accrued Cost** | $\le$ $15.00 limit | < $0.05 |
 
 ---
 
@@ -67,7 +65,5 @@
 
 ## 5. Next Immediate Actions
 
-1. Worker executes Phase 0 repository init, directory creation, `.gitignore`, and Python `matplotlib` installation.
-2. Worker executes Phase 1 AWS CLI commands (SG creation, key pair creation, 3 EC2 instance launches).
-3. Generate `lab.env` and verify private ICMP reachability (`ping -c3 $VICTIM_PRIVATE_IP`).
-4. Update `STATE.md` and append Phase 1 completion to `LAB_LOG.md`.
+1. Hand off Milestone 1 artifacts (`lab.env`, infra scripts, safety audit) to `orchestrator_1`.
+2. Transition to Milestone 2 (Victim Environment, Tooling & Safety Guardrails).

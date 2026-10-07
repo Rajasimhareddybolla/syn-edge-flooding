@@ -1,0 +1,10 @@
+ip-172-31-37-214
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens5             UP             172.31.37.214/20 metric 100 fe80::ff:d3ff:fe10:e83f/64 
+               Local time: Wed 2026-10-07 07:09:01 UTC
+           Universal time: Wed 2026-10-07 07:09:01 UTC
+                 RTC time: Wed 2026-10-07 07:09:01
+                Time zone: Etc/UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no

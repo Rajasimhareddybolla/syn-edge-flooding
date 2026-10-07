@@ -1,0 +1,19 @@
+=== Client -> Victim Private IP ICMP Ping (172.31.37.214) ===
+PING 172.31.37.214 (172.31.37.214) 56(84) bytes of data.
+64 bytes from 172.31.37.214: icmp_seq=1 ttl=64 time=0.627 ms
+64 bytes from 172.31.37.214: icmp_seq=2 ttl=64 time=0.187 ms
+64 bytes from 172.31.37.214: icmp_seq=3 ttl=64 time=0.196 ms
+
+--- 172.31.37.214 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2086ms
+rtt min/avg/max/mdev = 0.187/0.336/0.627/0.205 ms
+
+=== Attacker -> Victim Private IP ICMP Ping (172.31.37.214) ===
+PING 172.31.37.214 (172.31.37.214) 56(84) bytes of data.
+64 bytes from 172.31.37.214: icmp_seq=1 ttl=64 time=0.742 ms
+64 bytes from 172.31.37.214: icmp_seq=2 ttl=64 time=0.184 ms
+64 bytes from 172.31.37.214: icmp_seq=3 ttl=64 time=0.178 ms
+
+--- 172.31.37.214 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2077ms
+rtt min/avg/max/mdev = 0.178/0.368/0.742/0.264 ms
