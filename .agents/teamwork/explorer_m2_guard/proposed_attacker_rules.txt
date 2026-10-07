@@ -1,0 +1,35 @@
+# ==============================================================================
+# Attacker TCP RST Suppression iptables Rule
+# Reference: docs/AGENTS_tcp_flood_lab.md §4.1, Phase 2 §246; PROJECT.md §12.1 Feature 10
+# ==============================================================================
+# Purpose:
+# When hping3 injects raw SYN packets from the attacker instance, the attacker's
+# Linux kernel has no active TCP socket in SYN_SENT state for those flows.
+# When the victim responds with a SYN-ACK, the attacker kernel treats it as
+# unsolicited traffic and automatically responds with a TCP RST.
+# This kernel RST tears down the victim's half-open connection (SYN_RECV) immediately,
+# which completely defeats and masks the SYN flood experiment.
+#
+# Suppressing outbound TCP RST packets destined strictly to the victim private IP
+# preserves the half-open SYN_RECV state on the victim until timeout/exhaustion.
+#
+# Scope & Safety:
+# Strictly scoped to VICTIM_PRIVATE_IP. External traffic, SSH sessions to operator,
+# and inter-node client traffic are unaffected.
+# Mandatory removal during Phase 10 teardown.
+# ==============================================================================
+
+# Generic Rule Specification (requires VICTIM_PRIVATE_IP from lab.env):
+RULE_SPEC: sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -d $VICTIM_PRIVATE_IP -j DROP
+
+# Active Rule for Current Lab Deployment (VICTIM_PRIVATE_IP=172.31.37.214):
+ACTIVE_RULE: sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP
+
+# Idempotent Installation Command:
+INSTALL_CMD: sudo iptables -C OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP 2>/dev/null || sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP
+
+# Verification / Rule Check Command:
+CHECK_CMD: sudo iptables -C OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP
+
+# Phase 10 Teardown Removal Command:
+TEARDOWN_CMD: sudo iptables -D OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP

@@ -69,3 +69,37 @@
 - **Evidence Artifacts:** infra/sg_described.json, infra/instances_described.json, lab.env, infra/ping_verification.txt.
 - **Impact Analysis:** Testbed is fully operational and safely locked down.
 - **Human Authorization:** Covered under Gate G1 approval.
+
+## [2026-10-07T07:52:19Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.5.80/32.
+- **Rationale / Justification:** Maintain operator reachability.
+
+
+## [2026-10-07T07:52:24Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.5.80/32.
+- **Rationale / Justification:** Maintain operator reachability.
+
+
+## [2026-10-07T07:54:30Z] — PARAMETER_CHANGE: Operator CGNAT Egress Shift
+- **Phase:** Milestone 2 (Victim Environment & Tooling Exploration)
+- **Agent / Actor:** `explorer_m2_env`
+- **Category:** `[PARAMETER_CHANGE]`
+- **Description:** Authorized operator public egress IPv4 `152.57.24.183/32` in security group `sg-09e89875382c47277` for port 22 SSH ingress.
+- **Rationale / Justification:** ISP CGNAT rotated outbound IP from 152.57.129.48 to 152.57.24.183. Maintained strict RFC 2119 /32 restriction with zero 0.0.0.0/0 exposure.
+- **Impact Analysis:** Restores seamless SSH access to all lab nodes.
+- **Human Authorization:** Permitted under `docs/AGENTS_tcp_flood_lab.md` §234 and §4.1.
+
+
+## [2026-10-07T08:03:09Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.5.80/32.
+- **Rationale / Justification:** Maintain operator reachability.
+

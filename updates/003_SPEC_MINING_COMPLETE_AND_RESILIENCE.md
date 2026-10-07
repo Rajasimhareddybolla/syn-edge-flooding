@@ -26,3 +26,4 @@
 
 ## 3. Next Milestone
 The three survey specialists are compiling their final handoff files. Once received, `orchestrator_1` will synthesize the Feature Inventory into `PROJECT.md` and trigger Phase 1 AWS provisioning.
+

@@ -30,3 +30,4 @@ All three preparation tracks for Milestone 1 completed their exhaustive designs:
 ## 3. Blockers & Risks
 - **Blockers:** Zero active blockers.
 - **Next Transition:** Upon verified completion and handoff from `worker_m1`, the project transitions to Milestone 2 (Tooling, Nginx, Break/Fix Profiles, and Attack Guard).
+

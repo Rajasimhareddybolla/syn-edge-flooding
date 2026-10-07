@@ -62,8 +62,8 @@
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | Preflight & AWS Infrastructure Provisioning | Git repo init, local tools (`matplotlib`), AWS SG `lab-sg` (/32 only), EC2 key pair, launch 3 `t3.micro` nodes in `ap-south-1a`, generate `lab.env`, ICMP verification, `STATE.md`, `LAB_LOG.md`. | none | PLANNED |
-| M2 | Victim Environment, Tooling & Safety Guardrails | Ubuntu package installs, Nginx setup with backlog=128, sysctl break/fix profiles, snapshot defaults, attacker iptables RST drop rule, `attack_guard.sh` and `guard_selftest.sh` verification. | M1 | PLANNED |
+| M1 | Preflight & AWS Infrastructure Provisioning | Git repo init, local tools (`matplotlib`), AWS SG `lab-sg` (/32 only), EC2 key pair, launch 3 `t3.micro` nodes in `ap-south-1a`, generate `lab.env`, ICMP verification, `STATE.md`, `LAB_LOG.md`. | none | DONE |
+| M2 | Victim Environment, Tooling & Safety Guardrails | Ubuntu package installs, Nginx setup with backlog=128, sysctl break/fix profiles, snapshot defaults, attacker iptables RST drop rule, `attack_guard.sh` and `guard_selftest.sh` verification. | M1 | IN_PROGRESS |
 | M3 | Telemetry Instrumentation & Traffic Calibration | `sampler.py` (1 Hz /proc, <5ms latency), `probe.sh`, `conn_hold.py`, `collect.sh`, capacity calibration (`CAPACITY_RPS`), `crowd_levels.json`, generator dry runs. | M2 | PLANNED |
 | M4 | Empirical Scenario Matrix Execution | Serial scenario runner `run_scenario.sh`, execute 65 runs across S0–S5, pre-checks, randomized blocks, cooldown enforcement, populate `runs/<run_id>/` (10 artifacts) and `runs/INDEX.csv`. | M3 | PLANNED |
 | M5 | Detection Benchmark, Tuning & Publication Analysis | `replay.py`, `detector.py` (B1, D1, D2), grid tuning on reps 1–3 (`params.yaml`), evaluation on reps 4–5 (`metrics.csv`), overhead benchmarks O0–O4 (`overhead.csv`), figures F1–F8 (300 DPI) and tables T1–T5. | M4 | PLANNED |

@@ -2,10 +2,10 @@
 
 **Document Version:** 1.0  
 **Integrity Mode:** development  
-**Current Phase:** Phase 2 (Victim Environment & Tooling / Milestone M2 Ready)  
+**Current Phase:** Phase 2 (Victim Environment & Tooling / Milestone M2 In Progress)  
 **Overall Status:** IN_PROGRESS  
-**Lead Orchestrator:** orchestrator_1 (conversationId: f6cfd525-c586-41eb-8148-3a42cc6823d8)  
-**Last Updated:** 2026-10-07T07:12:00Z  
+**Lead Orchestrator:** orchestrator_1_gen2 (generation 2 orchestrator)  
+**Last Updated:** 2026-10-07T07:30:00Z  
 
 ---
 
@@ -25,7 +25,7 @@
 |---|---|---|---|---|---|---|---|---|
 | **0** | M1 | Preflight & Scaffolding | worker_m1 | COMPLETE | 2026-10-07T06:20:27Z | 2026-10-07T06:55:00Z | `.gitignore`, `STATE.md`, `LAB_LOG.md`, directories | `handoffs/A0.md` |
 | **1** | M1 | AWS Infrastructure Provisioning | worker_m1 | COMPLETE | 2026-10-07T06:55:00Z | 2026-10-07T07:11:00Z | `lab.env`, `infra/sg_described.json`, `infra/instances_described.json`, `infra/ping_verification.txt` | `handoffs/A1.md` |
-| **2** | M2 | Victim Environment & Tooling | A2 | PLANNED | — | — | Nginx backlog=128, sysctl profiles, `infra/attacker_rules.txt`, defaults | `handoffs/A2.md` |
+| **2** | M2 | Victim Environment & Tooling | worker_m2 | IN_PROGRESS | 2026-10-07T07:30:00Z | — | Nginx backlog=128, sysctl profiles, `infra/attacker_rules.txt`, defaults, `attack_guard.sh` | `handoffs/A2.md` |
 | **3** | M3 | Telemetry Instrumentation | A3 | PLANNED | — | — | `tools/sampler.py`, `tools/probe.sh`, `tools/collect.sh` | `handoffs/A3.md` |
 | **4** | M3 | Traffic Calibration & Guardrails | A4 | PLANNED | — | — | `tools/attack_guard.sh`, `infra/guard_selftest.txt`, `infra/crowd_levels.json` | `handoffs/A4.md` |
 | **5** | M4 | Empirical Scenario Execution | A5 | PLANNED | — | — | 65 runs in `runs/<run_id>/`, `runs/INDEX.csv` | `handoffs/A5.md` |
@@ -65,5 +65,6 @@
 
 ## 5. Next Immediate Actions
 
-1. Hand off Milestone 1 artifacts (`lab.env`, infra scripts, safety audit) to `orchestrator_1`.
-2. Transition to Milestone 2 (Victim Environment, Tooling & Safety Guardrails).
+1. Gate 1 certified PASS by 5 independent verifiers (Auditor: CLEAN, Reviewers: APPROVE, Challengers: APPROVE).
+2. Execute Milestone 2: deploy victim environment (Nginx backlog=128), attacker RST suppression, sysctl profiles, and bounded attack guard self-test.
+3. Simultaneously dispatch E2E testing track to establish requirement-driven test suite.

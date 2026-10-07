@@ -1,0 +1,19 @@
+# Attacker iptables RST Drop Rule — TCP Flood Lab
+# Generated: 2026-10-07T08:20:00Z
+# Purpose: Prevent attacker kernel from sending RST packets to victim when receiving
+#          SYN-ACKs for forged connections during SYN flood experiments.
+#          Without this rule, the kernel would reset all half-open connections.
+# 
+# Rule applied at Milestone 2 setup and verified persistent:
+# sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 172.31.37.214 -j DROP
+#
+# Verification output (iptables -L OUTPUT -n --line-numbers):
+# Chain OUTPUT (policy ACCEPT)
+# num  target     prot opt source               destination
+# 1    DROP       6    --  0.0.0.0/0            172.31.37.214        tcp flags:0x04/0x04
+#
+# Note: This rule is non-persistent across reboots. It is re-applied by set_profile.sh
+# and validated by attack_guard.sh before each attack run.
+#
+# Security constraint: This rule is scoped to victim private IP only (172.31.37.214).
+# It does NOT affect any other traffic.

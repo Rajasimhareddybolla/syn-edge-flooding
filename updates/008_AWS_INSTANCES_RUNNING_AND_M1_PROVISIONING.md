@@ -40,3 +40,4 @@ All three target EC2 instances and networking components have been provisioned i
 
 ## 4. Next Milestone
 Upon completion of Milestone 1 handoff, `orchestrator_1` will trigger Milestone 2: deploying Nginx, establishing sysctl break/fix profiles, and testing fail-safe attack guards on `attacker`.
+

@@ -1,0 +1,9 @@
+# Baseline System Defaults Captured Pre-Modification
+# Host: victim (172.31.37.214) / client (172.31.41.87)
+# Timestamp: 2026-10-07T08:08:00Z
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 128
+net.core.somaxconn = 4096
+net.ipv4.tcp_synack_retries = 5
+net.ipv4.ip_local_port_range = 32768	60999
+client_ulimit_n = 1024
