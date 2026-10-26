@@ -1,0 +1,23 @@
+\begin{table}
+\caption{Experimental Scenario Matrix}
+\label{tab:t1}
+\begin{tabular}{lllllr}
+\toprule
+Scenario & Type & Workload Generator & Intensity & SYN Cookies & Repetitions \\
+\midrule
+S0 & Baseline & wrk (-c2) & Quiet (2 conns) & Off (0) & 5 \\
+S1S & Flash Crowd (Small) & ab (-c10) & 15,000 reqs, c=10 & Off (0) & 5 \\
+S1M & Flash Crowd (Medium) & ab (-c25) & 30,000 reqs, c=25 & Off (0) & 5 \\
+S1L & Flash Crowd (Large) & ab (-c50) & 50,000 reqs, c=50 & Off (0) & 5 \\
+S2L & SYN Flood (Low) & hping3 (-i u10000) & 100 pps & Off (0) & 5 \\
+S2M & SYN Flood (Medium) & hping3 (-i u1000) & 1,000 pps & Off (0) & 5 \\
+S2H & SYN Flood (High) & hping3 (-i u100) & 10,000 pps & Off (0) & 5 \\
+S3L & Connection Flood (Low) & conn_hold.py & 100 concurrent holds & Off (0) & 5 \\
+S3M & Connection Flood (Medium) & conn_hold.py & 500 concurrent holds & Off (0) & 5 \\
+S3H & Connection Flood (High) & conn_hold.py & 2,000 concurrent holds & Off (0) & 5 \\
+S4 & Compound Flood & ab (-c25) + hping3 & Crowd M + SYN Flood M & Off (0) & 5 \\
+S5M & Mitigated SYN Flood (M) & hping3 (-i u1000) & 1,000 pps & On (1) & 5 \\
+S5H & Mitigated SYN Flood (H) & hping3 (-i u100) & 10,000 pps & On (1) & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}

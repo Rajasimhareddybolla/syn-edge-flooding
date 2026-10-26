@@ -1,0 +1,84 @@
+### concurrency=10
+Running 20s test @ http://172.31.37.214/
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   349.39us  106.93us   3.87ms   83.13%
+    Req/Sec    16.75k   437.24    17.70k    67.66%
+  Latency Distribution
+     50%  335.00us
+     75%  392.00us
+     90%  455.00us
+     99%  631.00us
+  334998 requests in 20.10s, 404.78MB read
+Requests/sec:  16666.70
+Transfer/sec:     20.14MB
+### concurrency=25
+Running 20s test @ http://172.31.37.214/
+  1 threads and 25 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   670.09us  288.89us  14.43ms   95.38%
+    Req/Sec    23.64k   789.20    24.71k    74.50%
+  Latency Distribution
+     50%  658.00us
+     75%  744.00us
+     90%  828.00us
+     99%    1.11ms
+  470523 requests in 20.00s, 568.54MB read
+Requests/sec:  23525.35
+Transfer/sec:     28.43MB
+### concurrency=50
+Running 20s test @ http://172.31.37.214/
+  1 threads and 50 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.64ms    2.00ms  65.89ms   97.95%
+    Req/Sec    22.54k     4.27k   24.76k    92.50%
+  Latency Distribution
+     50%    1.48ms
+     75%    1.71ms
+     90%    1.90ms
+     99%    7.57ms
+  448710 requests in 20.04s, 542.18MB read
+Requests/sec:  22387.96
+Transfer/sec:     27.05MB
+### concurrency=100
+Running 20s test @ http://172.31.37.214/
+  1 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.58ms    0.97ms  10.45ms   64.31%
+    Req/Sec    23.49k   821.14    24.77k    69.50%
+  Latency Distribution
+     50%    2.66ms
+     75%    3.26ms
+     90%    3.80ms
+     99%    4.47ms
+  467743 requests in 20.02s, 565.18MB read
+Requests/sec:  23366.76
+Transfer/sec:     28.23MB
+### concurrency=200
+Running 20s test @ http://172.31.37.214/
+  1 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     4.30ms    7.80ms 213.84ms   99.56%
+    Req/Sec    22.31k   841.59    24.03k    71.36%
+  Latency Distribution
+     50%    3.92ms
+     75%    5.13ms
+     90%    6.12ms
+     99%    8.42ms
+  444101 requests in 20.01s, 536.61MB read
+Requests/sec:  22196.99
+Transfer/sec:     26.82MB
+### concurrency=400
+Running 20s test @ http://172.31.37.214/
+  1 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     8.16ms   35.53ms 839.60ms   98.42%
+    Req/Sec    21.35k     2.45k   23.59k    92.96%
+  Latency Distribution
+     50%    4.54ms
+     75%    6.09ms
+     90%    7.73ms
+     99%  135.73ms
+  426238 requests in 20.09s, 515.03MB read
+Requests/sec:  21215.03
+Transfer/sec:     25.63MB

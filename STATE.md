@@ -2,7 +2,7 @@
 
 **Document Version:** 1.0  
 **Integrity Mode:** development  
-**Current Phase:** Phase 2 (Victim Environment & Tooling / Milestone M2 In Progress)  
+**Current Phase:** Phase 3 (Telemetry Instrumentation / Milestone M3 In Progress)  
 **Overall Status:** IN_PROGRESS  
 **Lead Orchestrator:** orchestrator_1_gen2 (generation 2 orchestrator)  
 **Last Updated:** 2026-10-07T07:30:00Z  
@@ -14,7 +14,7 @@
 | Gate ID | Description | Threshold / Trigger | Status | Confirmed By | Timestamp | Evidence / Artifact |
 |---|---|---|---|---|---|---|
 | **G1** | AWS Simulated DoS / Security Testing Policy Compliance | Mandatory prior to Phase 1 cloud provisioning | CONFIRMED | Raja (Human Owner) | 2026-10-07T06:40:00Z | Confirmed in chat & logged in `LAB_LOG.md` |
-| **G2** | Attack Guard Bounded Enforcement Self-Test Verification | Mandatory prior to Phase 5 first attack execution | PENDING | — | — | Awaiting `infra/guard_selftest.txt` (Phase 4) |
+| **G2** | Attack Guard Bounded Enforcement Self-Test Verification | Mandatory prior to Phase 5 first attack execution | CONFIRMED | Raja (Human Owner) | 2026-10-07T09:15:00Z | User confirmed safe continuation after reviewing the live 16/16 guard self-test; original §4.2 caps remain binding |
 | **G3** | Operational Cap Escalation (Rate, Duration, Conns) | Triggered only if raising caps defined in §4.2 | NONE | — | — | Strict default caps active: $\le$60s, $\le$10k pps, $\le$2k conns |
 
 ---
@@ -25,15 +25,15 @@
 |---|---|---|---|---|---|---|---|---|
 | **0** | M1 | Preflight & Scaffolding | worker_m1 | COMPLETE | 2026-10-07T06:20:27Z | 2026-10-07T06:55:00Z | `.gitignore`, `STATE.md`, `LAB_LOG.md`, directories | `handoffs/A0.md` |
 | **1** | M1 | AWS Infrastructure Provisioning | worker_m1 | COMPLETE | 2026-10-07T06:55:00Z | 2026-10-07T07:11:00Z | `lab.env`, `infra/sg_described.json`, `infra/instances_described.json`, `infra/ping_verification.txt` | `handoffs/A1.md` |
-| **2** | M2 | Victim Environment & Tooling | worker_m2 | IN_PROGRESS | 2026-10-07T07:30:00Z | — | Nginx backlog=128, sysctl profiles, `infra/attacker_rules.txt`, defaults, `attack_guard.sh` | `handoffs/A2.md` |
-| **3** | M3 | Telemetry Instrumentation | A3 | PLANNED | — | — | `tools/sampler.py`, `tools/probe.sh`, `tools/collect.sh` | `handoffs/A3.md` |
-| **4** | M3 | Traffic Calibration & Guardrails | A4 | PLANNED | — | — | `tools/attack_guard.sh`, `infra/guard_selftest.txt`, `infra/crowd_levels.json` | `handoffs/A4.md` |
-| **5** | M4 | Empirical Scenario Execution | A5 | PLANNED | — | — | 65 runs in `runs/<run_id>/`, `runs/INDEX.csv` | `handoffs/A5.md` |
-| **6** | M5 | Detection Benchmark & Tuning | A6 | PLANNED | — | — | `detector/replay.py`, `detector/params.yaml`, `analysis/metrics.csv` | `handoffs/A6.md` |
-| **7** | M5 | Mitigation Analysis (SYN Cookies) | A6 | PLANNED | — | — | S2 vs S5 comparative metrics in `analysis/metrics.csv` | `handoffs/A6.md` |
-| **8** | M5 | Overhead Profiling (O0–O4) | A5/A6 | PLANNED | — | — | `analysis/overhead.csv`, pidstat traces | `handoffs/A6.md` |
-| **9** | M5 | Publication Figures & Tables | A6/A7 | PLANNED | — | — | Figures `analysis/figures/F1–F8`, Tables `analysis/tables/T1–T5` | `handoffs/A7.md` |
-| **10** | M6 | Academic Report & Teardown | A7/A1 | PLANNED | — | — | `report/report.md`, `infra/teardown_verification.txt`, run archive | `handoffs/A7.md` |
+| **2** | M2 | Victim Environment & Tooling | worker_m2 | COMPLETE | 2026-10-07T07:30:00Z | 2026-10-07T08:24:00Z | Nginx backlog=128, sysctl profiles, `infra/attacker_rules.txt`, defaults, `attack_guard.sh` | `handoffs/A2.md` |
+| **3** | M3 | Telemetry Instrumentation | A3 | COMPLETE | 2026-10-07T08:30:00Z | 2026-10-07T09:00:00Z | `tools/sampler.py`, `tools/probe.sh`, `tools/collect.sh` | `handoffs/A3.md` |
+| **4** | M3 | Traffic Calibration & Guardrails | A4 | COMPLETE | 2026-10-07T09:00:00Z | 2026-10-07T09:30:00Z | `tools/attack_guard.sh`, `infra/guard_selftest_live_after_sudo.txt`, `infra/crowd_levels.json` | `handoffs/A4.md` |
+| **5** | M4 | Empirical Scenario Execution | A5 | COMPLETE | 2026-10-07T11:38:00Z | 2026-10-07T15:25:00Z | 65 runs in `runs/<run_id>/`, `runs/INDEX.csv` | `handoffs/A5.md` |
+| **6** | M5 | Detection Benchmark & Tuning | A6 | COMPLETE | 2026-10-07T15:30:00Z | 2026-10-07T16:55:00Z | `detector/replay.py`, `detector/params.yaml`, `analysis/metrics.csv` | `handoffs/A6.md` |
+| **7** | M5 | Mitigation Analysis (SYN Cookies) | A6 | COMPLETE | 2026-10-07T16:55:00Z | 2026-10-07T17:00:00Z | S2 vs S5 comparative metrics in `analysis/metrics.csv`, Figure F6 | `handoffs/A6.md` |
+| **8** | M5 | Overhead Profiling (O0–O4) | A5/A6 | COMPLETE | 2026-10-07T17:00:00Z | 2026-10-07T17:05:00Z | `analysis/overhead.csv`, Table T3, Figure F7 | `handoffs/A6.md` |
+| **9** | M5 | Publication Figures & Tables | A6/A7 | COMPLETE | 2026-10-07T17:05:00Z | 2026-10-07T17:10:00Z | Figures `analysis/figures/F1–F8`, Tables `analysis/tables/T1–T5` | `handoffs/A7.md` |
+| **10** | M6 | Academic Report & Teardown | A7/A1 | READY_FOR_TEARDOWN | 2026-10-07T17:10:00Z | — | `report/report.md`, `runs_and_analysis_archive.tar.gz`, teardown pending user sign-off | `handoffs/A7.md` |
 
 ---
 

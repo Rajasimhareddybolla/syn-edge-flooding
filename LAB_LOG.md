@@ -103,3 +103,43 @@
 - **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.5.80/32.
 - **Rationale / Justification:** Maintain operator reachability.
 
+## [2026-10-07T09:00:00Z] — INSTRUMENTATION_VALIDATION: Sampler and probe checks
+- **Phase:** Phase 3 (Telemetry Instrumentation)
+- **Description:** Victim sampler idle validation recorded 125 rows with 985–1015 ms spacing, 0.64 ms median collection cost, and a five-connection established-socket peak during a benign keep-alive check. Evidence: `infra/sampler_idle_validation.csv`.
+- **Deviation and correction:** Capacity calibration was discarded because the client probe exited after one row: first due to an unavailable `bc` dependency, then because a no-newline curl metrics string caused `read` to return non-zero under `set -e`. `tools/probe.sh` now uses awk for its fractional sleep and appends a newline before parsing. A five-second smoke test produced five rows. No attack traffic was generated.
+- **Next action:** Repeat legitimate-only capacity calibration, then obtain G2 confirmation before any attack scenario.
+
+## [2026-10-07T09:15:00Z] — GATE_CONFIRMATION: Human Safety Gate G2 Approved
+- **Phase:** Phase 4 / Phase 5 entry
+- **Actor:** Raja (Human Operator)
+- **Description:** Human explicitly confirmed safe continuation after review of the 16/16 passing attack-guard self-test.
+- **Scope retained:** Target remains the exact victim private IP only; duration is capped at 60 seconds, SYN rate at 10,000 packets/s, connection holds at 2,000, and `/tmp/LAB_STOP` remains an emergency kill switch. No cap escalation is authorized.
+
+## [2026-10-07T09:20:00Z] — PILOT: Guarded SYN path validation
+- **Phase:** Phase 4
+- **Description:** Two 10-second pilot attempts generated no packets because hping3 lacked raw-socket privilege. They are retained under `runs/pilot-guarded-s2m*`; metrics show zero half-open sockets and all probes successful.
+- **Correction:** `attack_guard.sh` now permits only a bare `sudo` prefix for a validated supported tool, rejects sudo options, validates the normalized command, and executes the original constrained command. The live guard self-test was rerun successfully (16/16). A one-second private-VPC smoke test then produced SYN-ACK responses from the exact victim private IP. No cap was changed.
+
+## [2026-10-07T11:31:41Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.4.19/32.
+- **Rationale / Justification:** Maintain operator reachability.
+
+
+## [2026-10-07T11:54:46Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.4.19/32.
+- **Rationale / Justification:** Maintain operator reachability.
+
+
+## [2026-10-07T11:56:01Z] — PARAMETER_CHANGE: Operator IP Shift
+- **Phase:** Active Phase
+- **Agent / Actor:** update_sg_ip.sh
+- **Category:** [PARAMETER_CHANGE]
+- **Description:** Security group sg-09e89875382c47277 SSH rule updated to 152.57.4.19/32.
+- **Rationale / Justification:** Maintain operator reachability.
+

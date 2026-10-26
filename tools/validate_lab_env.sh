@@ -7,9 +7,6 @@ if [[ ! -f "$ENV_FILE" ]]; then
     exit 1
 fi
 
-# shellcheck source=/dev/null
-source "$ENV_FILE"
-
 REQUIRED_VARS=(
     "AWS_REGION" "VPC_ID" "SG_ID" "KEY_NAME" "KEY_PATH"
     "VICTIM_ID" "ATTACKER_ID" "CLIENT_ID"
@@ -17,6 +14,16 @@ REQUIRED_VARS=(
     "VICTIM_PRIVATE_IP" "ATTACKER_PRIVATE_IP" "CLIENT_PRIVATE_IP"
     "VICTIM_IFACE"
 )
+
+# Treat the supplied file as the entire environment contract.  In particular,
+# do not allow a value exported by the caller to mask a missing declaration in
+# a candidate lab.env (this is important for both validation and fault tests).
+for var in "${REQUIRED_VARS[@]}"; do
+    unset "$var" || true
+done
+
+# shellcheck source=/dev/null
+source "$ENV_FILE"
 
 ERRORS=0
 for var in "${REQUIRED_VARS[@]}"; do
@@ -39,4 +46,3 @@ if [[ $ERRORS -gt 0 ]]; then
 fi
 
 echo "PASS: lab.env is complete and syntactically valid."
-

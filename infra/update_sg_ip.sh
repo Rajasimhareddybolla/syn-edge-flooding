@@ -26,9 +26,12 @@ CURRENT_CIDRS=$(aws ec2 describe-security-groups \
   --query 'SecurityGroups[0].IpPermissions[?FromPort==`22`].IpRanges[].CidrIp' \
   --output text)
 
+# Retain recent operator IPs (prune only if > 10 to support CGNAT multi-IP egress)
+COUNT=0
 for CIDR in $CURRENT_CIDRS; do
-  if [[ "$CIDR" != "${NEW_IP}/32" ]]; then
-    echo "Revoking stale SSH rule for $CIDR..."
+  COUNT=$((COUNT + 1))
+  if (( COUNT > 10 )) && [[ "$CIDR" != "${NEW_IP}/32" ]]; then
+    echo "Pruning excess SSH rule for $CIDR..."
     aws ec2 revoke-security-group-ingress \
       --group-id "$SG_ID" \
       --protocol tcp \
@@ -37,6 +40,7 @@ for CIDR in $CURRENT_CIDRS; do
       --region "$AWS_REGION" || true
   fi
 done
+
 
 echo "Authorizing updated SSH ingress for ${NEW_IP}/32..."
 aws ec2 authorize-security-group-ingress \

@@ -1,0 +1,4 @@
+detector,detection_rate_pct,false_alarm_rate_pct,median_delay_s,mean_delay_s,precision,recall,f1,fpr,auc_roc,params
+B1,66.67,0.00,1.15,1.24,0.3343,0.6446,0.4402,0.2107,0.7751,{'threshold': 16}
+D1,66.67,0.00,1.17,1.41,0.3300,0.6411,0.4357,0.2137,0.7635,"{'alpha': 0.3, 'k_vol': 2.5, 'tau': 0.98, 'floor': 15.0, 'warmup_steps': 20}"
+D2,100.00,12.50,1.19,1.49,0.4133,0.9571,0.5773,0.2230,0.9331,"{'alpha': 0.3, 'k_vol': 2.5, 'tau': 0.98, 'floor': 15.0, 'estab_thresh': 50.0, 'src_share_min': 0.7, 'cookie_thresh': 30.0, 'warmup_steps': 20}"

@@ -1,0 +1,17 @@
+B1:
+  threshold: 16
+D1:
+  alpha: 0.3
+  k_vol: 2.5
+  tau: 0.98
+  floor: 15.0
+  warmup_steps: 20
+D2:
+  alpha: 0.3
+  k_vol: 2.5
+  tau: 0.98
+  floor: 15.0
+  estab_thresh: 50.0
+  src_share_min: 0.7
+  cookie_thresh: 30.0
+  warmup_steps: 20

@@ -134,6 +134,21 @@ if [[ ${#ACTUAL_CMD[@]} -eq 0 ]]; then
     exit 1
 fi
 
+# Keep the command that will be executed separate from the normalized form
+# used for validation below.
+EXEC_CMD=("${ACTUAL_CMD[@]}")
+
+# hping3 requires CAP_NET_RAW on Ubuntu.  Permit only a bare leading sudo,
+# then validate the command it elevates exactly as if sudo were absent.  This
+# avoids turning the wrapper into a generic privileged-command launcher.
+if [[ "${ACTUAL_CMD[0]}" == "sudo" ]]; then
+    if [[ ${#ACTUAL_CMD[@]} -lt 2 || "${ACTUAL_CMD[1]}" == -* ]]; then
+        echo "❌ GUARD REFUSAL: sudo may only prefix a supported attack tool." >&2
+        exit 1
+    fi
+    ACTUAL_CMD=("${ACTUAL_CMD[@]:1}")
+fi
+
 # Identify base tool name
 TOOL_NAME="$(basename "${ACTUAL_CMD[0]}")"
 if [[ "$TOOL_NAME" == "python" || "$TOOL_NAME" == "python3" ]]; then
@@ -320,7 +335,7 @@ if (( DRY_RUN == 1 )); then
 fi
 
 # Real Execution: Launch wrapped in system timeout and active kill-switch watchdog
-timeout --preserve-status --kill-after=5s "${ENFORCED_TIMEOUT}s" "${ACTUAL_CMD[@]}" &
+timeout --preserve-status --kill-after=5s "${ENFORCED_TIMEOUT}s" "${EXEC_CMD[@]}" &
 ATTACK_PID=$!
 
 # Live watchdog for emergency kill switch

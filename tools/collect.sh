@@ -30,32 +30,28 @@ fi
 RUN_DIR="$REPO_ROOT/runs/$RUN_ID"
 mkdir -p "$RUN_DIR"
 
-SSH_OPTS="-i $KEY_PATH -o StrictHostKeyChecking=no -o BatchMode=yes"
+SSH_CMD=(ssh -i "$KEY_PATH" -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=10)
+SCP_CMD=(scp -i "$KEY_PATH" -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=10)
 
 REMOTE_TMP="/tmp/lab_run_$RUN_ID"
 
-echo "[collect] Starting collection for run: $RUN_ID"
+# Truncate nginx access log so each run captures only its window slice (§158)
+"${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" "sudo truncate -s 0 /var/log/nginx/access.log 2>/dev/null || true"
 
-# ==============================================================================
-# 1. Start sampler on victim
-# ==============================================================================
-ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" bash -s <<'EOF'
-mkdir -p /tmp/lab_run_PLACEHOLDER
-EOF
-
-ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" \
-    "mkdir -p $REMOTE_TMP && \
+"${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" \
+    "mkdir -p $REMOTE_TMP; \
      nohup python3 ~/syn-edge-flooding/tools/sampler.py \
          --out $REMOTE_TMP/victim_metrics.csv --hz 1 --method proc \
-         > $REMOTE_TMP/sampler.log 2>&1 & echo \$! > $REMOTE_TMP/sampler.pid" \
+         > $REMOTE_TMP/sampler.log 2>&1 < /dev/null & \
+     echo \$! > $REMOTE_TMP/sampler.pid" \
     || echo "[collect] WARNING: sampler start returned non-zero on victim"
 
 # ==============================================================================
 # 2. Start pidstat on victim
 # ==============================================================================
-ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" \
+"${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" \
     "nohup pidstat -u -r -p ALL 1 \
-         > $REMOTE_TMP/victim_cpu_pidstat.txt 2>&1 & echo \$! > $REMOTE_TMP/pidstat.pid" \
+         > $REMOTE_TMP/victim_cpu_pidstat.txt 2>&1 < /dev/null & echo \$! > $REMOTE_TMP/pidstat.pid" \
     || echo "[collect] WARNING: pidstat start returned non-zero"
 
 # ==============================================================================
@@ -63,7 +59,7 @@ ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" \
 # ==============================================================================
 if (( DO_PCAP )); then
     echo "[collect] Starting tcpdump (snaplen 96, port 80) on victim..."
-    ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" \
+    "${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" \
         "sudo timeout 180 tcpdump -i $VICTIM_IFACE -s 96 \
              -w $REMOTE_TMP/capture.pcap 'tcp port 80' \
              > $REMOTE_TMP/tcpdump.log 2>&1 &" \
@@ -73,11 +69,12 @@ fi
 # ==============================================================================
 # 4. Start probe on client
 # ==============================================================================
-ssh $SSH_OPTS "ubuntu@$CLIENT_PUB" \
-    "mkdir -p $REMOTE_TMP && \
+"${SSH_CMD[@]}" "ubuntu@$CLIENT_PUB" \
+    "mkdir -p $REMOTE_TMP; \
      nohup bash ~/syn-edge-flooding/tools/probe.sh $VICTIM_PRIVATE_IP \
          $REMOTE_TMP/probe.csv \
-         > $REMOTE_TMP/probe.log 2>&1 & echo \$! > $REMOTE_TMP/probe.pid" \
+         > $REMOTE_TMP/probe.log 2>&1 < /dev/null & \
+     echo \$! > $REMOTE_TMP/probe.pid" \
     || echo "[collect] WARNING: probe start returned non-zero on client"
 
 echo "[collect] All collectors started. Waiting for caller signal to stop..."
@@ -87,37 +84,46 @@ echo "[collect] All collectors started. Waiting for caller signal to stop..."
 # ==============================================================================
 stop_collectors() {
     echo "[collect] Stopping collectors..."
-    # Stop sampler
-    ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" \
+    # Stop sampler and pidstat
+    "${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" \
         "kill \$(cat $REMOTE_TMP/sampler.pid 2>/dev/null) 2>/dev/null || true; \
          kill \$(cat $REMOTE_TMP/pidstat.pid 2>/dev/null) 2>/dev/null || true" || true
 
-    # Stop probe
-    ssh $SSH_OPTS "ubuntu@$CLIENT_PUB" \
-        "kill \$(cat $REMOTE_TMP/probe.pid 2>/dev/null) 2>/dev/null || true" || true
+    # Stop probe and client load generators
+    "${SSH_CMD[@]}" "ubuntu@$CLIENT_PUB" \
+        "kill \$(cat $REMOTE_TMP/probe.pid 2>/dev/null) 2>/dev/null || true; \
+         killall wrk ab 2>/dev/null || true" || true
 
-    sleep 2
+    # Snapshot slice of nginx access log
+    "${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" \
+        "tail -n 2000 /var/log/nginx/access.log > $REMOTE_TMP/nginx_access.log 2>/dev/null || true" || true
+
+    sleep 1
 
     # Fetch artifacts from victim
     echo "[collect] Fetching artifacts from victim..."
-    scp $SSH_OPTS "ubuntu@$VICTIM_PUB:$REMOTE_TMP/victim_metrics.csv" "$RUN_DIR/" 2>/dev/null || echo "[collect] victim_metrics.csv missing"
-    scp $SSH_OPTS "ubuntu@$VICTIM_PUB:$REMOTE_TMP/victim_cpu_pidstat.txt" "$RUN_DIR/" 2>/dev/null || echo "[collect] pidstat missing"
-    scp $SSH_OPTS "ubuntu@$VICTIM_PUB:/var/log/nginx/access.log" "$RUN_DIR/nginx_access.log" 2>/dev/null || true
+    "${SCP_CMD[@]}" "ubuntu@$VICTIM_PUB:$REMOTE_TMP/victim_metrics.csv" "$RUN_DIR/" 2>/dev/null || echo "[collect] victim_metrics.csv missing"
+    "${SCP_CMD[@]}" "ubuntu@$VICTIM_PUB:$REMOTE_TMP/victim_cpu_pidstat.txt" "$RUN_DIR/" 2>/dev/null || echo "[collect] pidstat missing"
+    "${SCP_CMD[@]}" "ubuntu@$VICTIM_PUB:$REMOTE_TMP/nginx_access.log" "$RUN_DIR/nginx_access.log" 2>/dev/null || true
+
     if (( DO_PCAP )); then
-        scp $SSH_OPTS "ubuntu@$VICTIM_PUB:$REMOTE_TMP/capture.pcap" "$RUN_DIR/" 2>/dev/null || echo "[collect] pcap missing"
+        echo "[collect] Compressing capture.pcap before transfer..."
+        "${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" "gzip -1 $REMOTE_TMP/capture.pcap 2>/dev/null || true"
+        "${SCP_CMD[@]}" "ubuntu@$VICTIM_PUB:$REMOTE_TMP/capture.pcap.gz" "$RUN_DIR/" 2>/dev/null && gzip -d -f "$RUN_DIR/capture.pcap.gz" || echo "[collect] pcap missing"
     fi
+
 
     # Fetch artifacts from client
     echo "[collect] Fetching artifacts from client..."
-    scp $SSH_OPTS "ubuntu@$CLIENT_PUB:$REMOTE_TMP/probe.csv" "$RUN_DIR/" 2>/dev/null || echo "[collect] probe.csv missing"
+    "${SCP_CMD[@]}" "ubuntu@$CLIENT_PUB:$REMOTE_TMP/probe.csv" "$RUN_DIR/" 2>/dev/null || echo "[collect] probe.csv missing"
+    "${SCP_CMD[@]}" "ubuntu@$CLIENT_PUB:$REMOTE_TMP/load_client.txt" "$RUN_DIR/" 2>/dev/null || echo "[collect] load_client.txt missing"
 
     # Cleanup remote tmp
-    ssh $SSH_OPTS "ubuntu@$VICTIM_PUB" "rm -rf $REMOTE_TMP" 2>/dev/null || true
-    ssh $SSH_OPTS "ubuntu@$CLIENT_PUB" "rm -rf $REMOTE_TMP" 2>/dev/null || true
+    "${SSH_CMD[@]}" "ubuntu@$VICTIM_PUB" "rm -rf $REMOTE_TMP" 2>/dev/null || true
+    "${SSH_CMD[@]}" "ubuntu@$CLIENT_PUB" "rm -rf $REMOTE_TMP" 2>/dev/null || true
 
     echo "[collect] Artifacts fetched to $RUN_DIR/"
 }
 
 # Export stop function for sourcing
 export -f stop_collectors 2>/dev/null || true
-

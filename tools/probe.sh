@@ -24,7 +24,7 @@ while true; do
         curl -s -o /dev/null \
             --max-time 3 \
             -w "%{http_code} %{time_connect} %{time_total}" \
-            "http://$VICTIM_IP/" 2>/dev/null || echo "000 0 3"
+            "http://$VICTIM_IP/" 2>/dev/null; echo
     )
 
     ok=0
@@ -39,7 +39,7 @@ while true; do
     now_ms=$(date +%s%3N)
     sleep_ms=$((next_tick - now_ms))
     if (( sleep_ms > 0 )); then
-        sleep "$(echo "scale=3; $sleep_ms/1000" | bc)"
+        # Use awk rather than bc: the minimal client image need not ship bc.
+        sleep "$(awk -v ms="$sleep_ms" 'BEGIN { printf "%.3f", ms / 1000 }')"
     fi
 done
-

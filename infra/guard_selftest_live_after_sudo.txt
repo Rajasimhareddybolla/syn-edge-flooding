@@ -1,0 +1,27 @@
+======================================================================
+Starting Attack Guard Automated Self-Test (Gate G2 Preflight)
+Guard Binary:      /home/ubuntu/syn-edge-flooding/tools/attack_guard.sh
+Victim Private IP: 172.31.37.214
+Target Artifact:   /home/ubuntu/syn-edge-flooding/infra/guard_selftest.txt
+Timestamp:         2026-10-07T09:23:58Z
+======================================================================
+  [PASS] Test A1: Refuse unauthorized public IP (8.8.8.8) -> Refused as expected (exit 1)
+  [PASS] Test A2: Refuse unauthorized non-victim private IP (172.31.42.168) -> Refused as expected (exit 1)
+  [PASS] Test A3: Refuse conn_hold targeting unauthorized host via --host flag -> Refused as expected (exit 1)
+  [PASS] Test B1: Refuse duration 61 s via --duration flag -> Refused as expected (exit 1)
+  [PASS] Test B2: Refuse duration 61 s via timeout prefix command -> Refused as expected (exit 1)
+  [PASS] Test B3: Refuse conn_hold duration 61 s via --hold flag -> Refused as expected (exit 1)
+  [PASS] Test C1: Refuse interval below u100 (u99 = 10,101 pps) -> Refused as expected (exit 1)
+  [PASS] Test C2: Refuse interval below u100 (u10 = 100,000 pps) -> Refused as expected (exit 1)
+  [PASS] Test D1: Refuse forbidden --flood flag -> Refused as expected (exit 1)
+  [PASS] Test D2: Refuse forbidden --faster flag -> Refused as expected (exit 1)
+  [PASS] Test E1: Refuse connection count 2,001 (> 2,000) -> Refused as expected (exit 1)
+  [PASS] Test E2: Refuse connection count 5,000 via --connections flag -> Refused as expected (exit 1)
+  [PASS] Test F1: Refuse execution when emergency kill switch /tmp/LAB_STOP exists -> Refused as expected (exit 1)
+  [PASS] Test G1: Authorize valid hping3 flood (interval u1000 = 1,000 pps, duration 30s) -> Authorized as expected (exit 0)
+  [PASS] Test G2: Authorize valid conn_hold (conns 500, hold 30s) -> Authorized as expected (exit 0)
+  [PASS] Test G3: Authorize maximum boundary values (rate u100 = 10,000 pps, conns 2000, duration 60s) -> Authorized as expected (exit 0)
+======================================================================
+Self-Test Completed: 16/16 passed (0 failed).
+Verdict: PASS — Output recorded in /home/ubuntu/syn-edge-flooding/infra/guard_selftest.txt
+Human Gate G2 is READY for human operator sign-off.

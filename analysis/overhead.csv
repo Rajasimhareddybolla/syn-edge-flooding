@@ -1,0 +1,6 @@
+config,description,cpu_pct,rss_mb,sample_cost_ms
+O0_idle,Idle server (baseline),0.02,0.4,0.0
+O1_sampler_1hz,1 Hz socket sampler (/proc),0.12,12.8,0.64
+O2_sampler_plus_d1,Sampler + D1 online detector,0.15,14.2,0.72
+O3_sampler_plus_d2,Sampler + D2 multi-branch detector,0.18,15.6,0.79
+O4_packet_ids,Standard packet-level IDS (Suricata/Snort),4.8,142.0,12.4

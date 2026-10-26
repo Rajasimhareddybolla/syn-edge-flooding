@@ -1,0 +1,15 @@
+\begin{table}
+\caption{Threats to Validity and Experimental Limitations}
+\label{tab:t5}
+\begin{tabular}{llll}
+\toprule
+Constraint / Threat & Laboratory Manifestation & Real-World Impact & Mitigation / Generalization \\
+\midrule
+Single-Source Attacker & All attacks sent from attacker private IP (172.31.42.168) & AWS VPC blocks spoofing; real-world edge may face distributed botnets (DDoS). & top_src_share feature effective against concentrated sources; entropy-based features recommended for DDoS. \\
+Single-Source Legitimate Crowd & Flash crowd traffic generated exclusively from client node (172.31.41.87) & Natural crowds originate from diverse geographic ASNs. & PassiveOpens and HCR metrics aggregate across all sources, remaining invariant to client IP distribution. \\
+t3.micro Credit Throttling & Burstable EC2 instances with baseline CPU credit accumulation & High CPU consumption could induce artificial socket processing delays. & Instance metrics confirmed CPU remained below 80% during runs; probe latency verified <2ms. \\
+Synthetic Benchmarks (ab/wrk) & HTTP benchmarks generate uniform requests without human think-time & Production traffic exhibits long-tail file sizes and SSL/TLS handshakes. & Transport-layer TCP handshake mechanics are protocol-agnostic (L4 vs L7 independence). \\
+Single Kernel Version & Ubuntu 24.04 Noble LTS running Linux Kernel 6.8.0 & Older kernels may exhibit different SNMP counter increment semantics. & /proc/net/snmp and /proc/net/tcp interfaces have remained stable Linux ABIs across 2.6+ to 6.x. \\
+\bottomrule
+\end{tabular}
+\end{table}

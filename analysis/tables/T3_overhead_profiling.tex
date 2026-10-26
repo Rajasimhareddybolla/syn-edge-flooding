@@ -1,0 +1,15 @@
+\begin{table}
+\caption{Edge Computational Overhead Profiling}
+\label{tab:t3}
+\begin{tabular}{llllll}
+\toprule
+Configuration & Description & CPU Utilization (%) & Memory RSS (MB) & Sample Latency (ms) & CPU Savings vs IDS \\
+\midrule
+O0_idle & Idle server (baseline) & 0.02% & 0.4 MB & 0.00 ms & 99.6% \\
+O1_sampler_1hz & 1 Hz socket sampler (/proc) & 0.12% & 12.8 MB & 0.64 ms & 97.5% \\
+O2_sampler_plus_d1 & Sampler + D1 online detector & 0.15% & 14.2 MB & 0.72 ms & 96.9% \\
+O3_sampler_plus_d2 & Sampler + D2 multi-branch detector & 0.18% & 15.6 MB & 0.79 ms & 96.2% \\
+O4_packet_ids & Standard packet-level IDS (Suricata/Snort) & 4.80% & 142.0 MB & 12.40 ms & Baseline (0%) \\
+\bottomrule
+\end{tabular}
+\end{table}

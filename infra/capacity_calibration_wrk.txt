@@ -1,0 +1,54 @@
+### concurrency=10
+Running 20s test @ http://172.31.37.214/
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   350.66us  203.63us  20.02ms   97.64%
+    Req/Sec    17.05k     0.94k   19.12k    79.10%
+  341081 requests in 20.10s, 412.13MB read
+Requests/sec:  16969.26
+Transfer/sec:     20.50MB
+### concurrency=25
+Running 20s test @ http://172.31.37.214/
+  1 threads and 25 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   690.18us  298.35us  18.83ms   96.58%
+    Req/Sec    23.80k     0.90k   24.92k    86.50%
+  473731 requests in 20.00s, 572.41MB read
+Requests/sec:  23686.01
+Transfer/sec:     28.62MB
+### concurrency=50
+Running 20s test @ http://172.31.37.214/
+  1 threads and 50 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.51ms  571.39us  20.09ms   89.31%
+    Req/Sec    23.49k     1.70k   25.34k    93.50%
+  467397 requests in 20.00s, 564.76MB read
+Requests/sec:  23366.86
+Transfer/sec:     28.23MB
+### concurrency=100
+Running 20s test @ http://172.31.37.214/
+  1 threads and 100 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     2.61ms    0.95ms  12.62ms   66.25%
+    Req/Sec    23.61k   696.14    24.78k    71.50%
+  470114 requests in 20.02s, 568.04MB read
+Requests/sec:  23483.94
+Transfer/sec:     28.38MB
+### concurrency=200
+Running 20s test @ http://172.31.37.214/
+  1 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     4.45ms    8.08ms 215.59ms   99.52%
+    Req/Sec    22.42k     1.02k   24.20k    74.00%
+  447906 requests in 20.08s, 541.21MB read
+Requests/sec:  22301.03
+Transfer/sec:     26.95MB
+### concurrency=400
+Running 20s test @ http://172.31.37.214/
+  1 threads and 400 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     6.31ms   17.79ms 426.88ms   98.52%
+    Req/Sec    21.38k     3.10k   23.84k    92.46%
+  426307 requests in 20.08s, 515.11MB read
+Requests/sec:  21235.46
+Transfer/sec:     25.66MB
